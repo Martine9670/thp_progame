@@ -54,6 +54,9 @@ main#app {
 
   .logo {
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; // espace entre icône et texte
   }
 
   .nav-links {
@@ -65,12 +68,37 @@ main#app {
     }
 
     a {
+      display: flex;       // pour icône + texte
+      align-items: center;
+      gap: 0.4rem;        // espace entre icône et texte
       color: #fff;
       text-decoration: none;
       font-weight: bold;
+      position: relative;  // pour underline animée
+      transition: color 0.2s;
+
+      i {
+        font-size: 1rem;   // taille icône
+      }
 
       &:hover {
         color: #4fc3f7; // link color on hover
+      }
+
+      // underline animée
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #4fc3f7;
+        transition: width 0.3s;
+      }
+
+      &:hover::after {
+        width: 100%;
       }
     }
   }
