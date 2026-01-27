@@ -1,0 +1,32 @@
+// ========================
+// Breakpoints for responsive design
+// ========================
+
+// Mobile devices: screens smaller than 600px
+$breakpoint-mobile: 600px;
+
+// Tablets: screens smaller than 900px
+$breakpoint-tablet: 900px;
+
+// ========================
+// Mixin for mobile screens
+// ========================
+// Usage: @include mobile { ...styles... }
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content; // insert the styles where the mixin is called
+  }
+}
+
+// ========================
+// Mixin for tablet screens
+// ========================
+// Usage: @include tablet { ...styles... }
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content; // insert the styles where the mixin is called
+  }
+}
+
+
+

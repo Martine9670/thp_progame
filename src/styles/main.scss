@@ -1,0 +1,294 @@
+// ========================
+// Import shared variables and mixins
+// ========================
+@import "variables"; // colors, spacing, breakpoints
+@import "mixins";    // reusable media queries
+
+// ========================
+// Card variables
+// ========================
+$card-bg: #1e1e2f;                 // dark background for cards
+$card-color: #fff;                 // text color on cards
+$card-radius: 10px;                // rounded corners
+$card-shadow: 0 4px 6px rgba(0,0,0,0.3);   // normal shadow
+$hover-shadow: 0 12px 20px rgba(0,0,0,0.5); // shadow on hover
+$gradient-hover: linear-gradient(135deg, #f74fe1 0%, #1e1e2f 100%); // hover background gradient
+
+// ========================
+// BODY & LAYOUT
+// ========================
+html, body {
+  height: 100%;  // make sure body takes full window height
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; // light gray background
+  line-height: 1.4;          // spacing between lines
+  display: flex;              // allows vertical layout of navbar, main, footer
+  flex-direction: column;
+  min-height: 100vh;          // body at least full viewport height
+}
+
+// main container for dynamic content
+main#app {
+  flex: 1;           // fills remaining space to push footer down
+  padding: $spacing; // use consistent spacing
+}
+
+// ========================
+// NAVBAR
+// ========================
+.navbar {
+  display: flex;
+  justify-content: space-between; // logo on left, links on right
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1e1e2f;
+  color: #fff;
+  position: sticky;  // navbar stays on top when scrolling
+  top: 0;
+  z-index: 100;
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+
+    li {
+      list-style: none; // remove bullets
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+
+      &:hover {
+        color: #4fc3f7; // link color on hover
+      }
+    }
+  }
+}
+
+// ========================
+// PAGE LIST & SEARCH
+// ========================
+.page-list {
+  padding: 2rem;
+
+  #searchInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 columns
+    gap: 2rem;                             // space between cards
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr); // 2 columns on tablet
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;           // 1 column on mobile
+    }
+  }
+}
+
+// ========================
+// PAGE SCREENSHOTS
+// ========================
+
+.page-screenshots {
+  padding: 20px;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .screenshot {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    cursor: pointer;
+
+    &.hidden {
+      display: none;
+    }
+
+    img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    #closeLightbox {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
+.btn-screenshots {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 0.5rem 1rem;
+  background-color: #0d6efd;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: darken(#0d6efd, 10%);
+  }
+}
+
+// ========================
+// BACK BUTTON (PageScreenshots)
+// ========================
+.back-container {
+  margin-bottom: 1rem;
+
+  .btn-back {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: darken(#0d6efd, 10%);
+    }
+  }
+}
+
+// ========================
+// CARDS
+// ========================
+.cardGame {
+  position: relative;      // needed for video overlay
+  background-color: $card-bg;
+  color: $card-color;
+  border-radius: $card-radius;
+  box-shadow: $card-shadow;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;        // hides overflow for video effect
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-10px); // lift card slightly
+    box-shadow: $hover-shadow;    // stronger shadow
+    background: $gradient-hover;  // gradient on hover
+  }
+
+  img {
+    width: 100%;
+    border-radius: $card-radius;
+    margin-bottom: 10px;
+    object-fit: cover;        // image covers card area
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05); // zoom image on hover
+    }
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 4px 0;
+  }
+
+  a {
+    margin-top: auto;       // push link to bottom
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ========================
+  // Video overlay on card (optional)
+  // ========================
+  .game-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: $card-radius;
+    object-fit: cover;
+    opacity: 0;            // hidden by default
+    pointer-events: none;  // prevent blocking clicks
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover .game-video {
+    opacity: 1;            // show video on hover
+  }
+}
+
+// ========================
+// FOOTER
+// ========================
+footer {
+  padding: 1rem 2rem;
+  background-color: #1e1e2f;
+  color: #fff;
+  text-align: center;
+}
