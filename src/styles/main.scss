@@ -25,7 +25,7 @@ html, body {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5; // light gray background
+  background-color: #ec85e7; // light gray background
   line-height: 1.4;          // spacing between lines
   display: flex;              // allows vertical layout of navbar, main, footer
   flex-direction: column;
@@ -52,12 +52,40 @@ main#app {
   top: 0;
   z-index: 100;
 
-  .logo {
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem; // espace entre icône et texte
+.logo {
+  font-size: 2rem;
+  color: rgb(235, 37, 192);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  text-shadow:
+    0 0 5px rgb(235, 37, 192),
+    0 0 10px rgb(235, 37, 192),
+    0 0 20px rgb(255, 0, 200),
+    0 0 40px rgb(255, 0, 200);
+
+  animation: neonBlink 1.5s infinite alternate;
+}
+
+@keyframes neonBlink {
+  0% {
+    opacity: 0.6;
+    text-shadow:
+      0 0 3px rgb(235, 37, 192),
+      0 0 6px rgb(235, 37, 192),
+      0 0 12px rgb(255, 0, 200);
   }
+
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 6px rgb(235, 37, 192),
+      0 0 12px rgb(235, 37, 192),
+      0 0 25px rgb(255, 0, 200),
+      0 0 50px rgb(255, 0, 200);
+  }
+}
 
   .nav-links {
     display: flex;
@@ -82,7 +110,7 @@ main#app {
       }
 
       &:hover {
-        color: #4fc3f7; // link color on hover
+        color: #e025a8; // link color on hover
       }
 
       // underline animée
@@ -93,7 +121,7 @@ main#app {
         left: 0;
         width: 0;
         height: 2px;
-        background-color: #4fc3f7;
+        background-color: #4af0d4;
         transition: width 0.3s;
       }
 
@@ -103,6 +131,54 @@ main#app {
     }
   }
 }
+
+/* =================
+   WELCOME TEXT
+================= */
+.welcome-text {
+  text-align: center; /* centre le bloc entier */
+  margin-top: 1rem;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+  text-shadow: 0 0 8px rgba(235, 37, 192, 0.6);
+
+  display: inline-block; /* pour que le typewriter ne déborde pas */
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing-title 1.5s steps(30, end) forwards;
+}
+
+.welcome-subtitle {
+  font-size: 1.2rem;
+  color: black;
+  margin-top: 0.5rem;
+
+  display: inline-block;    /* inline-block pour l'animation */
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;                 /* commence invisible */
+  text-align: left;         /* force le texte à rester aligné à gauche dans son bloc */
+
+  animation: typing-subtitle 2.5s steps(68, end) forwards;
+  animation-delay: 1.5s;    /* commence juste après le titre */
+}
+
+/* ANIMATIONS */
+@keyframes typing-title {
+  from { width: 0; }
+  to { width: 22ch; } /* nombre approximatif de caractères du titre */
+}
+
+@keyframes typing-subtitle {
+  from { width: 0; }
+  to { width: 68ch; } /* nombre approximatif de caractères du sous-titre */
+}
+
 
 // ========================
 // PAGE LIST & SEARCH
@@ -116,7 +192,7 @@ main#app {
     padding: 0.5rem 1rem;
     margin-bottom: 2rem;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid #d11d1d;
     font-size: 1rem;
   }
 
@@ -200,7 +276,7 @@ main#app {
   display: inline-block;
   margin: 10px 0;
   padding: 0.5rem 1rem;
-  background-color: #0d6efd;
+  background-color: #fd0ddd;
   color: #fff;
   border-radius: 6px;
   text-decoration: none;
@@ -208,7 +284,7 @@ main#app {
   transition: background 0.2s;
 
   &:hover {
-    background-color: darken(#0d6efd, 10%);
+    background-color: darken(#4af0d4, 10%);
   }
 }
 
@@ -221,7 +297,7 @@ main#app {
   .btn-back {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #0d6efd;
+    background-color: #fd0ddd;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -230,7 +306,7 @@ main#app {
     transition: background 0.2s;
 
     &:hover {
-      background-color: darken(#0d6efd, 10%);
+      background-color: darken(#4af0d4, 10%);
     }
   }
 }
